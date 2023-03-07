@@ -10,6 +10,7 @@ function container() {
     radius: 50,
     padding: 10,
     circleThick: 5,
+    backGroundColor: "white",
   });
   container.appendChild(title);
   container.appendChild(radialComponent);
