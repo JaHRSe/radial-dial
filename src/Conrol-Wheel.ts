@@ -4,6 +4,15 @@ type radialProps = {
   padding: number;
   backGroundColor?: string;
 };
+
+type circleProps = {
+  canvas: HTMLCanvasElement;
+  radius: number;
+  circleThick: number;
+  innercircleThick: number;
+  knobWidth: number;
+};
+
 export function ControlWheel(props: radialProps) {
   const { radius, padding, circleThick, backGroundColor } = props;
   const knobWidth = circleThick * 1.1;
@@ -69,6 +78,11 @@ export function ControlWheel(props: radialProps) {
 
   canvas.addEventListener("mouseup", (_ev) => {
     isRotating = false;
+    const rotateEvent = new CustomEvent("rotate", {
+      bubbles: true,
+      detail: angleInRadians,
+    });
+    canvas.dispatchEvent(rotateEvent);
   });
   canvas.addEventListener("mousedown", (ev) => {
     // mouse position event is relative to client not canavs
@@ -91,14 +105,6 @@ export function ControlWheel(props: radialProps) {
   });
   return canvas;
 }
-
-type circleProps = {
-  canvas: HTMLCanvasElement;
-  radius: number;
-  circleThick: number;
-  innercircleThick: number;
-  knobWidth: number;
-};
 
 function drawCircle(props: circleProps) {
   const { canvas, radius, circleThick, innercircleThick, knobWidth } = props;

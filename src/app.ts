@@ -14,6 +14,10 @@ function container() {
   });
   container.appendChild(title);
   container.appendChild(radialComponent);
+  container.addEventListener("rotate", (ev) => {
+    // for testing event
+    console.log("event", ev);
+  });
   return container;
 }
 
