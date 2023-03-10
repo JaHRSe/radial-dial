@@ -2,4 +2,7 @@ node_modules
 dist
 package-lock.json
 webpack.config.js
+webpack.dev.js
+webpack.prod.js
+webpack.common.js
 .eslintrc.cjs

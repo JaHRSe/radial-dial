@@ -1,23 +1,22 @@
-import { ControlWheel } from "./Conrol-Wheel";
+import { ControlWheel } from "../src/Control-Wheel";
 
 function container() {
   const container = document.createElement("div");
   container.className = "container";
-  const title = document.createElement("h3");
-  title.innerText = "Radial Degree Display";
 
-  const radialComponent = ControlWheel({
-    radius: 50,
-    padding: 10,
+  const title = document.createElement("h3");
+  title.innerText = "Radial Control Wheel";
+
+  const controlWheel = ControlWheel({
     circleThick: 5,
+    padding: 10,
+    radius: 100,
     backGroundColor: "white",
   });
+
   container.appendChild(title);
-  container.appendChild(radialComponent);
-  container.addEventListener("rotate", (ev) => {
-    // for testing event
-    console.log("event", ev);
-  });
+  container.appendChild(controlWheel);
+
   return container;
 }
 

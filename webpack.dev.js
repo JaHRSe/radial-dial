@@ -1,14 +1,14 @@
-const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: "./src/app.ts",
-  output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
-  },
   devtool: "inline-source-map",
+  entry: "./publish/app.ts",
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Production",
+    }),
+  ],
   devServer: {
     static: "./dist",
   },
@@ -17,25 +17,23 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
+        exclude: [/node_modules/, "/src/app.ts"],
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              configFile: "tsconfig.prod.json",
+            },
+          },
+        ],
+        exclude: [/node_modules/],
       },
     ],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Rotationcal control",
-    }),
-  ],
-  output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
   },
 };
