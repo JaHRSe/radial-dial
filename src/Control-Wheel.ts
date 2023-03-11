@@ -29,6 +29,7 @@ export function ControlWheel(props: radialProps) {
   canvas.height = diameter + padding;
   canvas.style.backgroundColor = backGroundColor || "lightblue";
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   ctx.translate(origin.x, origin.y);
 
   const drawCircleCall = () =>
@@ -44,7 +45,6 @@ export function ControlWheel(props: radialProps) {
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, origin.x, origin.y);
     drawAngleDisplay({
-      origin,
       degrees: radianToDegrees(angleInRadians),
       canvas,
       radius,
@@ -76,7 +76,7 @@ export function ControlWheel(props: radialProps) {
     };
   }
 
-  canvas.addEventListener("mouseup", (_ev) => {
+  canvas.addEventListener("mouseup", () => {
     isRotating = false;
     const rotateEvent = new CustomEvent("rotate", {
       bubbles: true,
@@ -109,6 +109,7 @@ export function ControlWheel(props: radialProps) {
 function drawCircle(props: circleProps) {
   const { canvas, radius, circleThick, innercircleThick, knobWidth } = props;
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   clear(canvas);
   // Outer circle
   ctx.beginPath();
@@ -187,20 +188,19 @@ function isMouseInKnobArea(props: isMouseInKnobAreaProps) {
 
 function rotate(canvas: HTMLCanvasElement, angleInRadians: number) {
   const ctx = canvas.getContext("2d");
-  ctx.rotate(-angleInRadians);
-  //return canvas;
+  if (ctx) ctx.rotate(-angleInRadians);
 }
 
 type drawDegreDisplayProps = {
-  origin: { x: number; y: number };
   degrees: number;
   canvas: HTMLCanvasElement;
   radius: number;
   circleThick: number;
 };
 function drawAngleDisplay(props: drawDegreDisplayProps) {
-  const { origin, degrees, canvas, radius, circleThick } = props;
+  const { degrees, canvas, radius, circleThick } = props;
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   ctx.beginPath();
   ctx.font = `${radius * 0.65}px Arial`;
   ctx.strokeStyle = "#696969";
@@ -213,6 +213,7 @@ function drawAngleDisplay(props: drawDegreDisplayProps) {
 
 function clear(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
   ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);

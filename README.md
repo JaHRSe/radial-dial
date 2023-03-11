@@ -2,23 +2,20 @@
 
 ![radial degree control](./screen.jpg?raw=true)
 
-Description:
-A wheel that outputs the angle as it is turned.
+Description:<br>
+A UI wheel that displays the rotation angle and fires a custom event containing it as well.
 
-Getting Started
 Dependencies <br>
-    Production dependencies - None
+Production dependencies - None
 
 Installing
-To run project locally 
-    1. npm Install 
-    2. npm start
-
+To run project locally <br> 1. npm Install <br> 2. npm start<br>
+<br>
 Author <br>
-    Jacob Searles
+Jacob Searles
 
-Version History
+Version History<br>
 0.1
 
-License
+License<br>
 This project is licensed under the MIT License

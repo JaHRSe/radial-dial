@@ -1,6 +1,6 @@
 {
   "name": "radial-control",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A rotational user control",
   "main": "./dist/control-wheel.js",
   "module": "./dist/index.js",
