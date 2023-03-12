@@ -14,8 +14,12 @@ function container() {
     backGroundColor: "white",
   });
 
+  document.addEventListener("CONTROL_WHEEL_ROTATE", (ev) => {
+    console.log("rotate", (<CustomEvent>ev).detail); // detail contains the angle in radians
+  });
+
   container.appendChild(title);
-  container.appendChild(controlWheel);
+  if (controlWheel) container.appendChild(controlWheel);
 
   return container;
 }
