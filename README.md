@@ -3,7 +3,9 @@
 ![radial degree control](./screen.jpg?raw=true)
 
 Description:<br>
-A UI wheel that displays the rotation angle and fires a custom event containing it as well.
+A UI wheel that displays the rotation angle and fires a custom event containing it as well.<br>
+<br>
+To use, listen for "rotate" event. Event fires on mouse up after rotating the whell.
 
 Dependencies <br>
 Production dependencies - None
