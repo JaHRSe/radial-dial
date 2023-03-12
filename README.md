@@ -8,18 +8,18 @@ A UI wheel that displays the rotation angle and fires a custom event containing 
 To use, listen for "CONTROL_WHEEL_ROTATE" event. Event fires on mouse up after rotating the wheel.<br>
 
 Javascript
-'''javascript
+```javascript
 document.addEventListener("CONTROL_WHEEL_ROTATE", (ev) => {
-console.log("rotate", ev.detail); // ev.detail contains the angle in radians
+  const angleInRadians = ev.detail; // ev.detail contains the angle in radians
 });
-'''
+```
 Typescript<br>
 
-'''typescript
+```typescript
 document.addEventListener("CONTROL_WHEEL_ROTATE", (ev) => {
-angleInRadians = (<CustomEvent>ev).detail;
+  const angleInRadians = (<CustomEvent>ev).detail;
 });
-'''
+```
 Dependencies <br>
 Production dependencies - None
 
