@@ -75,7 +75,8 @@ export function ControlWheel(props: radialProps) {
       y: (ev.clientY - originRelClient.y) * -1,
     };
   }
-  canvas.addEventListener("mouseup", () => {
+
+  document.addEventListener("mouseup", () => {
     isRotating = false;
 
     const rotateEvent = new CustomEvent("CONTROL_WHEEL_ROTATE", {
@@ -103,6 +104,7 @@ export function ControlWheel(props: radialProps) {
       rotateCircle(newAngle);
     }
   });
+
   return canvas;
 }
 
