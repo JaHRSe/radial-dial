@@ -3,12 +3,12 @@
 ![radial degree control](./screen.jpg?raw=true)
 
 Description:<br>
-A UI wheel that displays the rotation angle and fires a custom event containing it as well.<br>
+A UI wheel that displays the angle in degrees as it is rotated and fires a custom event containing the same angle in radians<br>
 <br>
-To use, listen for "CONTROL_WHEEL_ROTATE" event. Event fires on mouse up after rotating the wheel.<br>
+
 Example<br>
 
-````typescript
+```javascript
 const controlWheel = ControlWheel({
   circleThick: 5, // thickness of wheel in pixels
   padding: 10, // Extra canvas area around the wheel
@@ -16,9 +16,9 @@ const controlWheel = ControlWheel({
   backGroundColor: "white", // Optional: Color of the canvas
   continuous: true, // Optional: if true, rotate event fires continuously as wheel moves
 });
-```<br>
+```
 
-Listen for wheel move event to get angle<br>
+Listen for wheel move "CONTROL_WHEEL_ROTATE" event to get angle<br>
 Javascript
 
 ```javascript
