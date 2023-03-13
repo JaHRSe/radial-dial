@@ -3,6 +3,7 @@ type radialProps = {
   circleThick: number;
   padding: number;
   backGroundColor?: string;
+  continuous?: boolean;
 };
 
 type circleProps = {
@@ -13,8 +14,17 @@ type circleProps = {
   knobWidth: number;
 };
 
+/**Returns an HTML canvas element with a graphical wheel and numerical angle display inside of the wheel.
+ * As the wheel rotates the display is updated. with the new angle in degrees. Fires even on
+ * mouseup or optionally on mouse move with the angle value in radians
+ * @param {number} radius - The radius of the circle in pixels
+ * @param {number} circleThick - The thickness of the wheel in pixels
+ * @param {number} padding - The padding space around the wheel in pixels
+ * @param {string} [backgroundColor] - The color of the canvas behind the wheel
+ * @param {string} [continuous] - If true, generate rotate event continuously as user moves the wheel
+ *  */
 export function ControlWheel(props: radialProps) {
-  const { radius, padding, circleThick, backGroundColor } = props;
+  const { radius, padding, circleThick, backGroundColor, continuous } = props;
   const knobWidth = circleThick * 1.1;
   const diameter = radius * 2;
   const xPad = padding > 0 ? padding / 2 : 0;
@@ -75,15 +85,16 @@ export function ControlWheel(props: radialProps) {
       y: (ev.clientY - originRelClient.y) * -1,
     };
   }
-
-  document.addEventListener("mouseup", () => {
-    isRotating = false;
-
+  const rotateEvent = () => {
     const rotateEvent = new CustomEvent("CONTROL_WHEEL_ROTATE", {
       bubbles: true,
       detail: angleInRadians,
     });
     canvas.dispatchEvent(rotateEvent);
+  };
+  document.addEventListener("mouseup", () => {
+    isRotating = false;
+    rotateEvent();
   });
   canvas.addEventListener("mousedown", (ev) => {
     // mouse position event is relative to client not canavs
@@ -102,6 +113,7 @@ export function ControlWheel(props: radialProps) {
     if (isRotating) {
       const newAngle = -Math.atan2(mousePosRelOrigin.x, mousePosRelOrigin.y); //counter clockwise is positive
       rotateCircle(newAngle);
+      if (continuous) rotateEvent();
     }
   });
 

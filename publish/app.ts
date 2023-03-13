@@ -12,6 +12,7 @@ function container() {
     padding: 10,
     radius: 100,
     backGroundColor: "white",
+    continuous: true,
   });
 
   document.addEventListener("CONTROL_WHEEL_ROTATE", (ev) => {
